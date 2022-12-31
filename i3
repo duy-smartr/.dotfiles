@@ -1,0 +1,1 @@
+/home/hayahaha/.config/i3
