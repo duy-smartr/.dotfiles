@@ -203,10 +203,27 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
-        tray_output primary
-        position top
+# status_command i3status
+# tray_output primary
+# position top
+# colors {
+#     background #000000
+#     statusline #ffffff
+#
+#     focused_workspace  #ffffff #285577
+#     active_workspace   #ffffff #333333
+#     inactive_workspace #888888 #222222
+#     urgent_workspace   #ffffff #900000
+# }
+  font pango:DejaVu Sans Mono, FontAwesome 10
+
+    position top
+    status_command ~/.config/i3/bumblebee-status/bumblebee-status \
+    -m cpu memory load date time \
+    -p disk.format="{used}/{size}" memory.format="{used}" time.format="%H:%M CW %V" date.format="%a, %b %d %Y" \
+    -t gruvbox-powerline
 }
+
 
 # ------------------------------------------
 # CUSTOM KEYS START
@@ -237,21 +254,22 @@ bindsym $mod+m move workspace to output left
 # Suspend
 bindsym $mod+Shift+period exec systemctl suspend
 
+# PICOM
+exec --no-startup-id picom -CGb
+
 # CAPSLOCK -> CTRL
 exec --no-startup-id /usr/bin/setxkbmap -option "ctrl:nocaps"
 # NITROGEN
 exec --no-startup-id nitrogen --restore
-# PICOM
-exec --no-startup-id picom -CGb
-
 # PRINT SCREEN
+
 bindsym --release Print exec gnome-screenshot -i
 bindsym --release $mod+Print exec gnome-screenshot -a
 
 # GAPS
-gaps inner 5
-gaps outer 5
-for_window [class="^.*"] border pixel 2
+gaps inner 4
+gaps outer 4
+for_window [class="^.*"] border pixel 1
 
 bindsym $mod+Shift+z gaps inner all set 0;gaps outer all set 0
 
